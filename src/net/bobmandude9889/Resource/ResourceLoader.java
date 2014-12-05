@@ -11,6 +11,7 @@ import javax.swing.ImageIcon;
 public class ResourceLoader {
 
 	public static URL getPath(String name) {
+		System.out.println("loading " + name);
 		return ClassLoader.getSystemResource("res/" + name);
 	}
 
@@ -24,7 +25,6 @@ public class ResourceLoader {
 	public static File getFile(String name) {
 		File file = null;
 		try {
-			System.out.println(name);
 			file = new File(getPath(name).toURI());
 		} catch (URISyntaxException e) {
 			e.printStackTrace();

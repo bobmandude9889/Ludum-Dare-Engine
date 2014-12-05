@@ -20,16 +20,16 @@ public class KeyHandler implements KeyListener {
 	public void keyPressed(KeyEvent e) {
 		switch (e.getKeyCode()) {
 		case 37:
-			camera.loc.x -= 0.1;
+			camera.location.x -= 0.1;
 			break;
 		case 38:
-			camera.loc.y -= 0.1;
+			camera.location.y -= 0.1;
 			break;
 		case 39:
-			camera.loc.x += 0.1;
+			camera.location.x += 0.1;
 			break;
 		case 40:
-			camera.loc.y += 0.1;
+			camera.location.y += 0.1;
 			break;
 		case 45:
 			camera.zoom -= 1;
@@ -38,7 +38,6 @@ public class KeyHandler implements KeyListener {
 			camera.zoom += 1;
 			break;
 		}
-		System.out.println(camera.zoom);
 		window.display.repaint();
 	}
 

@@ -1,5 +1,7 @@
 package net.bobmandude9889.Window;
 
+import java.awt.Point;
+
 import javax.swing.JFrame;
 
 import net.bobmandude9889.Render.Camera;
@@ -17,6 +19,10 @@ public class Window extends JFrame {
 		this.setVisible(true);
 		this.display = new Display(this,camera);
 		this.add(display);
+	}
+	
+	public boolean contains(Point point){
+		return point.x > 0 && point.x < getWidth() && point.y > 0 && point.y < getHeight();
 	}
 	
 }
