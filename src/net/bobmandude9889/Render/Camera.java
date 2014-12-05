@@ -1,6 +1,7 @@
 package net.bobmandude9889.Render;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Point;
@@ -75,10 +76,11 @@ public class Camera {
 			Location eLoc = e.getLocation();
 			Location topLeft = getTopLeft(window);
 			Point render = new Point((int) (zoom * (eLoc.x - topLeft.x)), (int) (zoom * (eLoc.y - topLeft.y)));
-			if (render.x + e.getImage().getWidth(null) > 0 && render.y + e.getImage().getHeight(null) > 0 && render.x < window.getWidth() && render.y < window.getHeight()) {
-				Image img = e.getImage();
-				double ratio = (double) img.getWidth(null) / (double) img.getHeight(null);
-				g.drawImage(img, render.x, render.y, zoom, (int) (zoom / ratio), null);
+			Image img = e.getImage();
+			double ratio = (double) img.getWidth(null) / (double) img.getHeight(null);
+			Dimension imgSize = new Dimension(zoom, (int) (zoom / ratio));
+			if (render.x + imgSize.width > 0 && render.y + imgSize.getHeight() > 0 && render.x < window.getWidth() && render.y < window.getHeight()) {
+				g.drawImage(img, render.x, render.y, imgSize.width, imgSize.height, null);
 			}
 		}
 	}
