@@ -24,7 +24,7 @@ public class Display extends JPanel implements Runnable, KeyListener {
 
 	@Override
 	public void paintComponent(Graphics g) {
-		camera.render(g, window);
+		camera.render(g, window, this.getSize());
 	}
 
 	@Override
