@@ -1,20 +1,18 @@
-package net.bobmandude9889.Resource;
+package net.bobmandude9889.resource;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.FloatControl;
 
-public class Sound implements Runnable {
+public class Sound {
 
 	private FloatControl volume;
 
 	private String fileName;
 
-	private float percentVolume;
-
 	public Clip clip;
-	
+
 	protected Sound(String name) {
 		this.fileName = name;
 		try {
@@ -30,25 +28,30 @@ public class Sound implements Runnable {
 
 	public void setVolume(float percent) {
 		float range = volume.getMaximum() - volume.getMinimum();
-		float vol = range * (percent / 100);
+		float vol = (float) (range * (Math.sqrt(percent) / 10));
 		volume.setValue(volume.getMinimum() + vol);
 	}
 
-	public synchronized void play(float percent) {
-		this.percentVolume = percent;
-		new Thread(this).start();
+	public float getVolume() {
+		return (volume.getValue() / volume.getMaximum()) * 100f;
 	}
 
-	@Override
-	public void run() {
-		try {
-			clip.start();
-			float range = volume.getMaximum() - volume.getMinimum();
-			float vol = range * (percentVolume / 100);
-			volume.setValue(volume.getMinimum() + vol);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	public boolean isPlaying() {
+		return clip.getFrameLength() != clip.getFramePosition() && clip.isRunning();
+	}
+
+	public void pause(){
+		clip.stop();
+	}
+	
+	public void resume(){
+		clip.start();
+	}
+	
+	public synchronized void play(float percent) {
+		setVolume(percent);
+		clip.setFramePosition(0);
+		clip.start();
 	}
 
 }
