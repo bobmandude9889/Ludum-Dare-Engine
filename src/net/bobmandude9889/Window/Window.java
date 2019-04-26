@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 
 import net.bobmandude9889.Render.Camera;
 
+@SuppressWarnings("serial")
 public class Window extends JFrame {
 	
 	public Display display;

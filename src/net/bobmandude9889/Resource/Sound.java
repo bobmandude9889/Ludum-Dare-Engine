@@ -1,4 +1,4 @@
-package net.bobmandude9889.resource;
+package net.bobmandude9889.Resource;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
